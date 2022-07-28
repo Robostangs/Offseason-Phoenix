@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -13,7 +14,7 @@ public class IntakeSubsystem extends SubsystemBase{
 
     private IntakeSubsystem()
     {
-        ingester = new TalonSRX(INGESTER);
+        ingester = new CANSparkMax(INGESTER, MotorType.kBrushless);
     }
 
     public void setIngestPower(double power) {
