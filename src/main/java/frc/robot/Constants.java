@@ -18,7 +18,7 @@ public final class Constants {
      *
      * Should be measured from center to center.
      */
-    public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.60325; // FIXME Measure and set trackwidth
+    public static final double DRIVETRAIN_TRACKWIDTH_METERS = 0.60325;
     /**
      * The front-to-back distance between the drivetrain wheels.
      *
@@ -53,4 +53,10 @@ public final class Constants {
     public static final int INTAKE_SOLENOID_RIGHT_REVERSE = 0; // FIX ME: Add correct CAN ID
     public static final int INTAKE_COMPRESSOR = 0; // FIX ME: Add correct CAN ID
 
+    public static final int SHOOTER_FLYWHEEL_MOTOR = 0; // FIX ME: Set the correct flywheel motor ID
+    public static final int SHOOTER_HOOD_MOTOR = 0; // FIX ME: Set the correct hood motor ID
+    public static final double SHOOTER_HOOD_MOTOR_ANGLE_OFFSET = 0; // FIX ME: Set the correct hood offset motor ID
+    public static final double SHOOTER_FLYWHEEL_RADIUS = 0; // FIX ME: Set the flywheel diameter
+    public static final double SHOOTER_HEIGHT = 0; // FIX ME: Set the shooter height
+    public static final double HOOP_HEIGHT = 0; // FIX ME: Set the hoop height
 }
