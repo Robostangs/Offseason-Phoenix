@@ -46,11 +46,10 @@ public final class Constants {
     public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 20; // FIXME Set back right steer encoder ID
     public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(110.7); // FIXME Measure and set back right steer offset
 
-    public static final class Shooter{
-        public static final int FLYWHEELMOTOR_ID = 3; // temporary value
-        public static final boolean FLYWHEEL_INVERTED = false;
-        public static final int HOOD_MOTOR_ID = 314159;
-        public static final int HOOD_MOTOR_ENCODER_OFFSET = 5;
-        public static final boolean HOOD_INVERTED = false;
-    }
+    public static final int SHOOTER_FLYWHEEL_MOTOR = 0; // FIX ME: Set the correct flywheel motor ID
+    public static final int SHOOTER_HOOD_MOTOR = 0; // FIX ME: Set the correct hood motor ID
+    public static final double SHOOTER_HOOD_MOTOR_ANGLE_OFFSET = 0; // FIX ME: Set the correct hood offset motor ID
+    public static final double SHOOTER_FLYWHEEL_RADIUS = 0; // FIX ME: Set the flywheel diameter
+    public static final double SHOOTER_HEIGHT = 0; // FIX ME: Set the shooter height
+    public static final double HOOP_HEIGHT = 0; // FIX ME: Set the hoop height
 }
