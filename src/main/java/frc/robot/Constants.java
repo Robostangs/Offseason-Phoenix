@@ -46,12 +46,31 @@ public final class Constants {
     public static final int BACK_RIGHT_MODULE_STEER_ENCODER = 20;
     public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(110.7);
 
-    public static final int INTAKE_MOTOR = 0; // FIX ME: Add correct CAN ID
-    public static final int INTAKE_SOLENOID_LEFT_FORWARD = 0; // FIX ME: Add correct CAN ID
-    public static final int INTAKE_SOLENOID_RIGHT_FORWARD = 0; // FIX ME: Add correct CAN ID
-    public static final int INTAKE_SOLENOID_LEFT_REVERSE = 0; // FIX ME: Add correct CAN ID
-    public static final int INTAKE_SOLENOID_RIGHT_REVERSE = 0; // FIX ME: Add correct CAN ID
-    public static final int INTAKE_COMPRESSOR = 0; // FIX ME: Add correct CAN ID
+    public static final int INTAKE_MOTOR = 30;
+    public static final int INTAKE_SOLENOID_FORWARD = 4;
+    public static final int INTAKE_SOLENOID_REVERSE = 5;
+    public static final int INTAKE_COMPRESSOR = 31;
+
+
+    public static final int FEEDER_BELT_MOTOR_ID = 0; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_ROLLER_MOTOR_ID = 0; // FIX ME: Add correct CAN ID
+
+    public static final int FEEDER_DARK_INTAKE_ID = 0; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_LIGHT_INTAKE_ID = 0; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_DARK_SHOOTER_ID = 0; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_LIGHT_SHOOTER_ID = 0; // FIX ME: Add correct CAN ID
+    
+    public static final double FEEDER_DEBOUNCE_TIME = 0.1;
+    public static final double FEEDER_BELT_SPEED = 0.3;
+    public static final double FEEDER_ROLLER_SPEED = 0.2;
+
+    public static class Limelight {
+        public static final double kTargetHeight = 104.5;
+        public static final double kLimelightHeight = 0;
+        public static final double kTargetHeightDelta = kTargetHeight - kLimelightHeight;
+        public static final double kLimelightAngle = 0;
+    }
+
 
     public static final int SHOOTER_FLYWHEEL_MOTOR = 0; // FIX ME: Set the correct flywheel motor ID
     public static final int SHOOTER_HOOD_MOTOR = 0; // FIX ME: Set the correct hood motor ID

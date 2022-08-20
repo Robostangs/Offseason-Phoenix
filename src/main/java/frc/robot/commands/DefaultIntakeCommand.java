@@ -21,7 +21,7 @@ public class DefaultIntakeCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(m_intakePowerSupplier.getAsDouble() > 0.1) {
+        if(m_intakePowerSupplier.getAsDouble() < -0.1) {
             m_intakeSubsystem.setIntakePosition(true);
             m_intakeSubsystem.setIntakeMotorPower(m_intakePowerSupplier.getAsDouble());
         } else {

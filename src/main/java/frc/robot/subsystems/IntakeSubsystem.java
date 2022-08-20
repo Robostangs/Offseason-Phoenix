@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -13,25 +13,22 @@ import static frc.robot.Constants.*;
 
 public class IntakeSubsystem extends SubsystemBase{
 
-    private TalonFX m_intakeMotor;
-    private DoubleSolenoid m_intakeSolenoidLeft, m_intakeSolenoidRight;
+    private TalonSRX m_intakeMotor;
+    private DoubleSolenoid m_intakeSolenoid;
     private Compressor m_intakeCompressor;
 
     public IntakeSubsystem() {
-        m_intakeMotor = new TalonFX(INTAKE_MOTOR);
-        m_intakeSolenoidLeft = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, INTAKE_SOLENOID_LEFT_FORWARD, INTAKE_SOLENOID_LEFT_REVERSE);
-        m_intakeSolenoidRight = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, INTAKE_SOLENOID_RIGHT_FORWARD, INTAKE_SOLENOID_RIGHT_REVERSE);
+        m_intakeMotor = new TalonSRX(INTAKE_MOTOR);
+        m_intakeSolenoid = new DoubleSolenoid(INTAKE_COMPRESSOR, PneumaticsModuleType.CTREPCM, INTAKE_SOLENOID_FORWARD, INTAKE_SOLENOID_REVERSE);
         m_intakeCompressor = new Compressor(INTAKE_COMPRESSOR, PneumaticsModuleType.CTREPCM);
         SmartDashboard.putBoolean("Solenoid", false);
     }
 
     public void setIntakePosition(boolean state) {
         if(state) {
-            m_intakeSolenoidLeft.set(Value.kForward);
-            m_intakeSolenoidRight.set(Value.kForward);
+            m_intakeSolenoid.set(Value.kForward);
         } else {
-            m_intakeSolenoidLeft.set(Value.kReverse);
-            m_intakeSolenoidRight.set(Value.kReverse);
+            m_intakeSolenoid.set(Value.kReverse);
         }
     }
 
@@ -44,12 +41,12 @@ public class IntakeSubsystem extends SubsystemBase{
     }
 
     public void setIntakeMotorPower(double speed) {
-        m_intakeMotor.set(TalonFXControlMode.PercentOutput, speed);
+        m_intakeMotor.set(TalonSRXControlMode.PercentOutput, speed);
     }
 
     
     public void stopIntake() {
-        m_intakeMotor.set(TalonFXControlMode.PercentOutput, 0);
+        m_intakeMotor.set(TalonSRXControlMode.PercentOutput, 0);
     }
 
     @Override
@@ -58,7 +55,4 @@ public class IntakeSubsystem extends SubsystemBase{
         setIntakePosition(SmartDashboard.getBoolean("Solenoid", false));
         super.periodic();
     }
-
-    
-}
-    
+}    
