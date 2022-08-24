@@ -47,18 +47,18 @@ public final class Constants {
     public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(110.7);
 
     public static final int INTAKE_MOTOR = 30;
-    public static final int INTAKE_SOLENOID_FORWARD = 4;
-    public static final int INTAKE_SOLENOID_REVERSE = 5;
+    public static final int INTAKE_SOLENOID_FORWARD = 7;
+    public static final int INTAKE_SOLENOID_REVERSE = 6;
     public static final int INTAKE_COMPRESSOR = 31;
 
 
-    public static final int FEEDER_BELT_MOTOR_ID = 0; // FIX ME: Add correct CAN ID
-    public static final int FEEDER_ROLLER_MOTOR_ID = 0; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_BELT_MOTOR_ID = 40; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_ROLLER_MOTOR_ID = 41; // FIX ME: Add correct CAN ID
 
-    public static final int FEEDER_DARK_INTAKE_ID = 0; // FIX ME: Add correct CAN ID
-    public static final int FEEDER_LIGHT_INTAKE_ID = 0; // FIX ME: Add correct CAN ID
-    public static final int FEEDER_DARK_SHOOTER_ID = 0; // FIX ME: Add correct CAN ID
-    public static final int FEEDER_LIGHT_SHOOTER_ID = 0; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_DARK_INTAKE_ID = 0; // FIX ME: Add correct CAN IDddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    public static final int FEEDER_LIGHT_INTAKE_ID = 1; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_DARK_SHOOTER_ID = 2; // FIX ME: Add correct CAN ID
+    public static final int FEEDER_LIGHT_SHOOTER_ID = 3; // FIX ME: Add correct CAN ID
     
     public static final double FEEDER_DEBOUNCE_TIME = 0.1;
     public static final double FEEDER_BELT_SPEED = 0.3;

@@ -29,6 +29,7 @@ public class DefaultTeleOpCommand extends CommandBase {
         m_commandGroup = new ParallelCommandGroup(m_driveCommand, m_intakeCommand, m_feederCommand);
 
         addRequirements(intakeSubsystem);
+        addRequirements(feederSubsystem);
         addRequirements(drivetrainSubsystem);
     }
     
