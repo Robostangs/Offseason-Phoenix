@@ -47,9 +47,11 @@ public final class Constants {
     public static final double BACK_RIGHT_MODULE_STEER_OFFSET = -Math.toRadians(110.7);
 
     public static final int INTAKE_MOTOR = 30;
-    public static final int INTAKE_SOLENOID_FORWARD = 7;
-    public static final int INTAKE_SOLENOID_REVERSE = 6;
+    public static final int INTAKE_SOLENOID_FORWARD = 6;
+    public static final int INTAKE_SOLENOID_REVERSE = 7;
     public static final int INTAKE_COMPRESSOR = 31;
+    public static final double INTAKE_INGEST_SPEED = 0.7;
+    public static final double INTAKE_EXGEST_SPEED = -0.7;
 
 
     public static final int FEEDER_BELT_MOTOR_ID = 40; // FIX ME: Add correct CAN ID
@@ -61,20 +63,19 @@ public final class Constants {
     public static final int FEEDER_LIGHT_SHOOTER_ID = 3; // FIX ME: Add correct CAN ID
     
     public static final double FEEDER_DEBOUNCE_TIME = 0.1;
-    public static final double FEEDER_BELT_SPEED = 0.3;
-    public static final double FEEDER_ROLLER_SPEED = 0.2;
+    public static final double FEEDER_BELT_SPEED = 0.8;
+    public static final double FEEDER_ROLLER_INTAKE_SPEED = -0.3;
+    public static final double FEEDER_ROLLER_SHOOT_SPEED = -0.8;
 
     public static class Limelight {
-        public static final double kTargetHeight = 104.5;
+        public static final double kTargetHeight = 104;
         public static final double kLimelightHeight = 0;
         public static final double kTargetHeightDelta = kTargetHeight - kLimelightHeight;
         public static final double kLimelightAngle = 0;
     }
 
 
-    public static final int SHOOTER_FLYWHEEL_MOTOR = 0; // FIX ME: Set the correct flywheel motor ID
-    public static final int SHOOTER_HOOD_MOTOR = 0; // FIX ME: Set the correct hood motor ID
-    public static final double SHOOTER_HOOD_MOTOR_ANGLE_OFFSET = 0; // FIX ME: Set the correct hood offset motor ID
+    public static final int SHOOTER_FLYWHEEL_MOTOR = 50; // FIX ME: Set the correct flywheel motor ID
     public static final double SHOOTER_FLYWHEEL_RADIUS = 0; // FIX ME: Set the flywheel diameter
     public static final double SHOOTER_HEIGHT = 0; // FIX ME: Set the shooter height
     public static final double HOOP_HEIGHT = 0; // FIX ME: Set the hoop height
