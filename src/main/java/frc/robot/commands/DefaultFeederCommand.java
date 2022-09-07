@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 
@@ -18,26 +19,26 @@ public class DefaultFeederCommand extends CommandBase {
     
     public DefaultFeederCommand(FeederSubsystem feederSubsystem, DoubleSupplier shooterPowerSupplier) {
         m_feederSubsystem = feederSubsystem;
-        m_shooterPowerSupplier = shooterPowerSupplier;
-
-        addRequirements(m_feederSubsystem);
+        m_shooterPowerSupplier = shooterPowerSupplier; addRequirements(m_feederSubsystem);
         setName("Default Feeder Command");
     }
 
     @Override
     public void execute() {
-        m_feederSubsystem.setBeltPower(FEEDER_BELT_SPEED);
-        if (outDebouncer.calculate(m_feederSubsystem.getShooterSensorLight() || !m_feederSubsystem.getShooterSensorDark())) {
-            if(m_shooterPowerSupplier.getAsDouble() < -0.1) {
-                m_feederSubsystem.setRollerPower(FEEDER_ROLLER_SHOOT_SPEED);
-            } else {
-                m_feederSubsystem.setRollerPower(0);
-            }
-        } else if (inDebouncer.calculate(m_feederSubsystem.getIntakeSensorLight() || !m_feederSubsystem.getIntakeSensorDark())) {
-            m_feederSubsystem.setRollerPower(FEEDER_ROLLER_INTAKE_SPEED);
+        if (inDebouncer.calculate(m_feederSubsystem.getIntakeSensorLight() || !m_feederSubsystem.getIntakeSensorDark())) {
+            m_feederSubsystem.setBeltPower(FEEDER_BELT_SPEED);
+        } else {
+            m_feederSubsystem.setBeltPower(0);
         }
-        else {
+        if (outDebouncer.calculate(m_feederSubsystem.getShooterSensorLight() || !m_feederSubsystem.getShooterSensorDark())) {
+            m_feederSubsystem.setRollerPower(FEEDER_ROLLER_INTAKE_SPEED);
+        } else {
             m_feederSubsystem.setRollerPower(0);
+        }
+
+        SmartDashboard.putNumber("SHOOT POWER", m_shooterPowerSupplier.getAsDouble());
+        if(m_shooterPowerSupplier.getAsDouble() < -0.1) {
+            m_feederSubsystem.setRollerPower(FEEDER_ROLLER_SHOOT_SPEED);
         }
     }
 

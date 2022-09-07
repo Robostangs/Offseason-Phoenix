@@ -20,11 +20,7 @@ public class DefaultShooterCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(m_shooterPowerSupplier.getAsDouble() < 0.1) {
-            m_shooterSubsystem.setShooterMotorPower(m_shooterPowerSupplier.getAsDouble());
-        } else {
-            m_shooterSubsystem.setShooterMotorPower(0);
-        }
+        m_shooterSubsystem.setShooterMotorPower(-1.0);
     }
 
     @Override
