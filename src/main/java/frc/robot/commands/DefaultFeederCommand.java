@@ -25,15 +25,16 @@ public class DefaultFeederCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (inDebouncer.calculate(m_feederSubsystem.getIntakeSensorLight() || !m_feederSubsystem.getIntakeSensorDark())) {
-            m_feederSubsystem.setBeltPower(FEEDER_BELT_SPEED);
-        } else {
-            m_feederSubsystem.setBeltPower(0);
-        }
-        if (outDebouncer.calculate(m_feederSubsystem.getShooterSensorLight() || !m_feederSubsystem.getShooterSensorDark())) {
-            m_feederSubsystem.setRollerPower(FEEDER_ROLLER_INTAKE_SPEED);
-        } else {
+        if (outDebouncer.calculate(m_feederSubsystem.getShooterSensorDark() || !m_feederSubsystem.getShooterSensorLight())) {
             m_feederSubsystem.setRollerPower(0);
+            if (inDebouncer.calculate(m_feederSubsystem.getIntakeSensorDark() || !m_feederSubsystem.getIntakeSensorLight())) {
+                m_feederSubsystem.setBeltPower(0);
+            } else {
+                m_feederSubsystem.setBeltPower(FEEDER_BELT_SPEED);
+            }
+        } else {
+            m_feederSubsystem.setRollerPower(FEEDER_ROLLER_INTAKE_SPEED);
+            m_feederSubsystem.setBeltPower(FEEDER_BELT_SPEED);
         }
 
         SmartDashboard.putNumber("SHOOT POWER", m_shooterPowerSupplier.getAsDouble());

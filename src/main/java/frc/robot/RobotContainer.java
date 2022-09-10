@@ -42,10 +42,10 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   // private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
 
   private final XboxController m_DriverController = new XboxController(0);
-  private final XboxController m_ManipController = new XboxController(1);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -56,17 +56,28 @@ public class RobotContainer {
     // Left stick Y axis -> forward and backwards movement
     // Left stick X axis -> left and right movement
     // Right stick X axis -> rotation
+    //TODO: FIX THIS
     m_drivetrainSubsystem.setDefaultCommand(new DefaultTeleOpCommand(
             m_drivetrainSubsystem,
             m_intakeSubsystem,
             m_feederSubsystem,
             m_shooterSubsystem,
+            m_limelightSubsystem,
             () -> -modifyAxis(m_DriverController.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(m_DriverController.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(m_DriverController.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
             () -> -modifyAxis(m_DriverController.getRightTriggerAxis()),
-            () -> -modifyAxis(m_DriverController.getLeftTriggerAxis())
+            () -> -modifyAxis(m_DriverController.getLeftTriggerAxis()),
+            () -> m_DriverController.getAButton()
     ));
+
+    new JoystickButton(m_DriverController, XboxController.Button.kA.value)
+      .whenHeld(new DefaultShooterCommand(m_shooterSubsystem,
+                                          m_limelightSubsystem,
+                                          m_drivetrainSubsystem,
+                                          new AutoShootCommand(m_feederSubsystem)
+      )
+    );
 
     // Configure the button bindings
     configureButtonBindings();

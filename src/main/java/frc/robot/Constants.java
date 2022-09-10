@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -63,17 +66,28 @@ public final class Constants {
     public static final int FEEDER_LIGHT_SHOOTER_ID = 3; // FIX ME: Add correct CAN ID
     
     public static final double FEEDER_DEBOUNCE_TIME = 0.1;
-    public static final double FEEDER_BELT_SPEED = -0.8;
-    public static final double FEEDER_ROLLER_INTAKE_SPEED = -0.6;
+    public static final double FEEDER_BELT_SPEED = -0.5;
+    public static final double FEEDER_ROLLER_INTAKE_SPEED = -0.3;
     public static final double FEEDER_ROLLER_SHOOT_SPEED = -0.8;
 
     public static class Limelight {
         public static final double kTargetHeight = 104;
         public static final double kLimelightHeight = 39;
         public static final double kTargetHeightDelta = kTargetHeight - kLimelightHeight;
-        public static final double kLimelightAngle = 0;
+        public static final double kLimelightAngle = 29.97;
     }
 
+    public static final double AIMING_SPEED = 0.7;
+
+    public static final TalonFXConfiguration SHOOTER_CONFIGURATION = new TalonFXConfiguration();
+    static {
+        SHOOTER_CONFIGURATION.slot0 = new SlotConfiguration();
+        SHOOTER_CONFIGURATION.slot0.kP = 0.01;
+        SHOOTER_CONFIGURATION.slot0.kI = 0.0005;
+        SHOOTER_CONFIGURATION.slot0.kD = 0.01;
+        SHOOTER_CONFIGURATION.slot0.kF = 0.01;
+        SHOOTER_CONFIGURATION.slot0.maxIntegralAccumulator = 0.00000001;
+    }
 
     public static final int SHOOTER_FLYWHEEL_MOTOR = 50; // FIX ME: Set the correct flywheel motor ID
     public static final double SHOOTER_FLYWHEEL_RADIUS = 0; // FIX ME: Set the flywheel diameter

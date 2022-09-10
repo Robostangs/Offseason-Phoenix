@@ -9,7 +9,7 @@ import static frc.robot.Constants.*;
 
 public class LimelightSubsystem extends SubsystemBase {
 
-    private final static NetworkTable LimelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    private final static NetworkTable LimelightTable = NetworkTableInstance.getDefault().getTable("limelight-driver");
 
     private static double tx = 0;
     private static double ty = 0;
@@ -21,6 +21,7 @@ public class LimelightSubsystem extends SubsystemBase {
             DataLogManager.log("LLtable is Null"); 
         }
         LimelightTable.getEntry("pipeline").setNumber(0);
+
     }
 
     @Override
@@ -42,7 +43,12 @@ public class LimelightSubsystem extends SubsystemBase {
     }
 
     public static double getDistance() {
-        return Limelight.kTargetHeightDelta / (Math.tan(Math.toDegrees(ty + Limelight.kLimelightAngle)));
+        //System.out.println((Math.tan(degToRad(ty + Limelight.kLimelightAngle))));
+        return Limelight.kTargetHeightDelta / (Math.tan(degToRad(ty + Limelight.kLimelightAngle)));
+    }
+
+    public static double degToRad(double x) {
+        return (Math.PI / 180.0) *x;
     }
 
     public static double getTx() {

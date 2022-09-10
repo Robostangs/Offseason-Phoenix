@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 public class DrivetrainSubsystem extends SubsystemBase {
   /**
@@ -165,12 +166,20 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_gyro.reset();
   }
 
+  public double getGyroAngle() {
+          return m_gyro.getAngle();
+  }
+
   public Rotation2d getGyroscopeRotation() {
     return Rotation2d.fromDegrees(180 - m_gyro.getYaw());
   }
 
   public void resetOdometry(Pose2d pose) {
     m_odometer.resetPosition(pose, getGyroscopeRotation());
+  }
+
+  public void spin(double power) {
+        drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,power,getGyroscopeRotation()));
   }
 
   public void drive(ChassisSpeeds chassisSpeeds) {
@@ -180,6 +189,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public SwerveDriveKinematics getKinematics() {
           return m_kinematics;
   }
+
+  public static double degToRad(double x) {
+        return (Math.PI / 180.0) *x;
+}
 
   public Pose2d getPose() {
           return m_odometer.getPoseMeters();
@@ -193,8 +206,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
-    m_odometer.update(getGyroscopeRotation(), states[0], states[1], states[2], states[3]);
-    setModuleStates(states);
+     SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
+     m_odometer.update(getGyroscopeRotation(), states[0], states[1], states[2], states[3]);
+     setModuleStates(states);
+
+    // spin(1);
   }
 }

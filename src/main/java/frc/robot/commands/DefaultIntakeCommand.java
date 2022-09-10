@@ -21,8 +21,8 @@ public class DefaultIntakeCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_intakeSubsystem.setIntakePosition(true);
-        /*
+        //m_intakeSubsystem.setIntakePosition(true);
+        
         if(m_intakePowerSupplier.getAsDouble() < -0.1) {
             m_intakeSubsystem.setIntakePosition(true);
             m_intakeSubsystem.setIntakeMotorPower(m_intakePowerSupplier.getAsDouble());
@@ -30,13 +30,11 @@ public class DefaultIntakeCommand extends CommandBase {
             m_intakeSubsystem.setIntakePosition(false);
             m_intakeSubsystem.stopIntake();
         }
-        */
+        
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_intakeSubsystem.setIntakePosition(false);
-        m_intakeSubsystem.setCompresser(false);
         m_intakeSubsystem.stopIntake();
     }
 }
