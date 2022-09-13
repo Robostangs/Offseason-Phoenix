@@ -79,6 +79,10 @@ public class RobotContainer {
       )
     );
 
+    new JoystickButton(m_DriverController, XboxController.Button.kB.value)
+      .whenHeld(new ManualShootCommand(m_feederSubsystem, m_shooterSubsystem));
+    
+
     // Configure the button bindings
     configureButtonBindings();
   }

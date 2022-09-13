@@ -47,7 +47,7 @@ public class DefaultShooterCommand extends CommandBase {
                 }
             }
         } else {
-            m_drivetrainSubsystem.spin(5);
+            m_drivetrainSubsystem.spin(2);
         }
     }
 
