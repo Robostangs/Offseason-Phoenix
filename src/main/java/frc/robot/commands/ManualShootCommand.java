@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 
@@ -15,6 +16,8 @@ public class ManualShootCommand extends CommandBase {
         m_feederSubsystem = feederSubsystem;
         m_shooterSubsystem = shooterSubsystem;
 
+        addRequirements(feederSubsystem);
+        addRequirements(shooterSubsystem);
         setName("Default Feeder Command");
     }
 

@@ -37,6 +37,6 @@ public class ShooterSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         super.periodic();
-        setShooterMotorVelocity(SmartDashboard.getNumber("ShooterVelo", 0));
+        SmartDashboard.putNumber("Set Shooter Speed", getFlywheelVelocity());
     }
 }

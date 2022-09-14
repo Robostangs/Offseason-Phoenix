@@ -72,7 +72,7 @@ public class RobotContainer {
     ));
 
     new JoystickButton(m_DriverController, XboxController.Button.kA.value)
-      .whenHeld(new DefaultShooterCommand(m_shooterSubsystem,
+      .whileHeld(new DefaultShooterCommand(m_shooterSubsystem,
                                           m_limelightSubsystem,
                                           m_drivetrainSubsystem,
                                           new AutoShootCommand(m_feederSubsystem)
@@ -80,7 +80,7 @@ public class RobotContainer {
     );
 
     new JoystickButton(m_DriverController, XboxController.Button.kB.value)
-      .whenHeld(new ManualShootCommand(m_feederSubsystem, m_shooterSubsystem));
+      .whileHeld(new ManualShootCommand(m_feederSubsystem, m_shooterSubsystem));
     
 
     // Configure the button bindings

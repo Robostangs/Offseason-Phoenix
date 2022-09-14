@@ -84,11 +84,11 @@ public final class Constants {
     public static final TalonFXConfiguration SHOOTER_CONFIGURATION = new TalonFXConfiguration();
     static {
         SHOOTER_CONFIGURATION.slot0 = new SlotConfiguration();
-        SHOOTER_CONFIGURATION.slot0.kP = 0.005;
-        SHOOTER_CONFIGURATION.slot0.kI = 0.0001;
-        SHOOTER_CONFIGURATION.slot0.kD = 0.001;
-        SHOOTER_CONFIGURATION.slot0.kF = 0.01;
-        SHOOTER_CONFIGURATION.slot0.maxIntegralAccumulator = 0.00000001;
+        SHOOTER_CONFIGURATION.slot0.kP = 0.00001;
+        SHOOTER_CONFIGURATION.slot0.kI = 0.0002;
+        SHOOTER_CONFIGURATION.slot0.kD = 0.0005;
+        SHOOTER_CONFIGURATION.slot0.kF = 0.001;
+        // SHOOTER_CONFIGURATION.slot0.maxIntegralAccumulator = 0.00000001;
     }
 
     public static final int SHOOTER_FLYWHEEL_MOTOR = 50; // FIX ME: Set the correct flywheel motor ID

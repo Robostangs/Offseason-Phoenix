@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.ShooterMappings;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -28,22 +29,27 @@ public class DefaultShooterCommand extends CommandBase {
         addRequirements(shooterSubsystem);
         addRequirements(limelightSubsystem);
         addRequirements(drivetrainSubsystem);
-        SmartDashboard.putNumber("Shooter Power:", 6000);
+      SmartDashboard.putNumber("Shooter Power:", 0000);
     }
 
     @Override
     public void execute() {
-        double speed = SmartDashboard.getNumber("Shooter Power:", 6000);
+        // double speed = SmartDashboard.getNumber("Shooter Power:", 0000);
+        double speed = ShooterMappings.getValueWithDistance(LimelightSubsystem.getDistance());
         if(m_limelightSubsystem.getTv() == 1 ) {
             m_shooterSubsystem.setShooterMotorVelocity(-speed);
             double rotateSpeed = -m_turnPid.calculate(m_limelightSubsystem.getTx());
             m_drivetrainSubsystem.spin(rotateSpeed);
-            if(Math.abs(rotateSpeed) < 0.5 && Math.abs(m_limelightSubsystem.getTx()) < 1) {
+            if(Math.abs(rotateSpeed) < 0.5 && Math.abs(m_limelightSubsystem.getTx()) < 3) {
                 System.out.println(m_shooterSubsystem.getFlywheelVelocity());
-                if(m_shooterSubsystem.getFlywheelVelocity() >= speed - 100 &&
-                   m_shooterSubsystem.getFlywheelVelocity() <= speed + 100) {
+
+                if(m_shooterSubsystem.getFlywheelVelocity() >= -speed - 100 &&
+                   m_shooterSubsystem.getFlywheelVelocity() <= -speed + 100) {
                     System.out.println("Shooting!");
                     m_shootCommand.schedule();
+                }
+                else {
+                    m_shootCommand.cancel();
                 }
             }
         } else {
@@ -53,6 +59,7 @@ public class DefaultShooterCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-            m_shooterSubsystem.setShooterMotorPower(0);
+        m_shootCommand.cancel();
+        m_shooterSubsystem.setShooterMotorPower(0);
     }
 }

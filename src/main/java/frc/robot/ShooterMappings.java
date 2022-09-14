@@ -10,7 +10,11 @@ public class ShooterMappings {
 
     static {
         kShooterStates = new HashMap<Double, Double>();
-       
+        kShooterStates.put(131.0, 3600.0);
+        kShooterStates.put(102.0, 3300.0);
+        kShooterStates.put(173.0, 4850.0);
+        kShooterStates.put(154.0, 4100.0);
+        kShooterStates.put(115.0, 3350.0); 
     };
     private static final ArrayList<Double> kDistances = new ArrayList<Double>();
     static {
@@ -33,6 +37,10 @@ public class ShooterMappings {
             double above = kDistances.get(index);
             return (distance - below) > (above - distance) ? above : below;
         }
+    }
+
+    public static double getValueWithDistance(double distance) {
+        return ((0.2816 * Math.pow(distance, 2)) - (55.524 * distance) + 6027.64);
     }
 
     public static Double getShooterState(double distance) {
