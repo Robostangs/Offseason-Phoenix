@@ -9,27 +9,28 @@ import static frc.robot.Constants.*;
 
 public class LimelightSubsystem extends SubsystemBase {
 
-    private final static NetworkTable LimelightTable = NetworkTableInstance.getDefault().getTable("limelight-driver");
+    private final NetworkTable m_limelightTable;
 
-    private static double tx = 0;
-    private static double ty = 0;
-    private static double tv = 0;
-    private static double ta = 0;
+    private double tx = 0;
+    private double ty = 0;
+    private double tv = 0;
+    private double ta = 0;
 
-    public LimelightSubsystem() {
-        if(LimelightTable == null) {
+    public LimelightSubsystem(String limelightName) {
+        m_limelightTable = NetworkTableInstance.getDefault().getTable(limelightName);
+        if(m_limelightTable == null) {
             DataLogManager.log("LLtable is Null"); 
         }
-        LimelightTable.getEntry("pipeline").setNumber(0);
+        m_limelightTable.getEntry("pipeline").setNumber(0);
 
     }
 
     @Override
     public void periodic() {
-        tx = LimelightTable.getEntry("tx").getDouble(0);
-        ty = LimelightTable.getEntry("ty").getDouble(0);
-        tv = LimelightTable.getEntry("tv").getDouble(0);
-        ta = LimelightTable.getEntry("ta").getDouble(0);
+        tx = m_limelightTable.getEntry("tx").getDouble(0);
+        ty = m_limelightTable.getEntry("ty").getDouble(0);
+        tv = m_limelightTable.getEntry("tv").getDouble(0);
+        ta = m_limelightTable.getEntry("ta").getDouble(0);
     }
 
     @Override
@@ -39,43 +40,43 @@ public class LimelightSubsystem extends SubsystemBase {
         builder.addDoubleProperty("ty", () -> ty, null);
         builder.addDoubleProperty("tv", () -> tv, null);
         builder.addDoubleProperty("ta", () -> ta, null);
-        builder.addDoubleProperty("distance", LimelightSubsystem::getDistance, null);
+        builder.addDoubleProperty("distance", this::getDistance, null);
     }
 
-    public static double getDistance() {
+    public double getDistance() {
         //System.out.println((Math.tan(degToRad(ty + Limelight.kLimelightAngle))));
         return Limelight.kTargetHeightDelta / (Math.tan(degToRad(ty + Limelight.kLimelightAngle)));
     }
 
-    public static double degToRad(double x) {
+    public double degToRad(double x) {
         return (Math.PI / 180.0) *x;
     }
 
-    public static double getTx() {
+    public double getTx() {
         return tx;
     }
 
-    public static double getTy() {
+    public double getTy() {
         return ty;
     }
 
-    public static int getTv() {
+    public int getTv() {
         return (int) Math.round(tv);
     }
 
-    public static double getTa() {
+    public double getTa() {
         return ta;
     }
 
-    public static void enableLEDs() {
-        LimelightTable.getEntry("ledMode").setNumber(0);
+    public void enableLEDs() {
+        m_limelightTable.getEntry("ledMode").setNumber(0);
     }
 
-    public static void disableLEDs() {
-        LimelightTable.getEntry("ledMode").setNumber(1);
+    public void disableLEDs() {
+        m_limelightTable.getEntry("ledMode").setNumber(1);
     }
 
-    public static void blinkLEDs() {
-        LimelightTable.getEntry("ledMode").setNumber(2);
+    public void blinkLEDs() {
+        m_limelightTable.getEntry("ledMode").setNumber(2);
     }
 }

@@ -42,8 +42,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
-  // private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem("limelight-driver");
 
   private final XboxController m_DriverController = new XboxController(0);
 
