@@ -167,7 +167,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public double getGyroAngle() {
-          return m_gyro.getAngle();
+        return m_gyro.getAngle();
   }
 
   public Rotation2d getGyroscopeRotation() {

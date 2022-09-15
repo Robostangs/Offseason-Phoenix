@@ -65,7 +65,7 @@ public class RobotContainer {
             m_limelightSubsystem,
             () -> -modifyAxis(m_DriverController.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(m_DriverController.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-            () -> -modifyAxis(m_DriverController.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+            () -> -modifyAxis(-m_DriverController.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
             () -> -modifyAxis(m_DriverController.getRightTriggerAxis()),
             () -> -modifyAxis(m_DriverController.getLeftTriggerAxis()),
             () -> m_DriverController.getAButton()
@@ -106,47 +106,47 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-        
-        try {
-            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve("/home/lvuser/deploy/Eight.wpilib.json");
-            final Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+        return new DefaultAuto(m_drivetrainSubsystem, m_intakeSubsystem, m_feederSubsystem, m_shooterSubsystem, m_limelightSubsystem);
+        // try {
+        //     Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve("/home/lvuser/deploy/Eight.wpilib.json");
+        //     final Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
 
-        /*
-        Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-          new Pose2d(0, 0, new Rotation2d(0)),
-          List.of(),
-          new Pose2d(2, 1, new Rotation2d(0)),
-          trajectoryConfig
-        );
-        */
+        // /*
+        // Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+        //   new Pose2d(0, 0, new Rotation2d(0)),
+        //   List.of(),
+        //   new Pose2d(2, 1, new Rotation2d(0)),
+        //   trajectoryConfig
+        // );
+        // */
 
-        PIDController xController = new PIDController(0.1, 0, 0);
-        PIDController yController = new PIDController(0.1, 0, 0);
-        ProfiledPIDController thetaController = new ProfiledPIDController(
-          0.1, 0, 0,
-          new TrapezoidProfile.Constraints(
-            Math.PI * 0.4,
-            Math.PI / 4)
-          );
-        thetaController.enableContinuousInput(-Math.PI, Math.PI);
+        // PIDController xController = new PIDController(0.1, 0, 0);
+        // PIDController yController = new PIDController(0.1, 0, 0);
+        // ProfiledPIDController thetaController = new ProfiledPIDController(
+        //   0.1, 0, 0,
+        //   new TrapezoidProfile.Constraints(
+        //     Math.PI * 0.4,
+        //     Math.PI / 4)
+        //   );
+        // thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-        SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-          trajectory,
-          m_drivetrainSubsystem::getPose,
-          m_drivetrainSubsystem.getKinematics(),
-          xController,
-          yController,
-          thetaController,
-          m_drivetrainSubsystem::setModuleStates,
-          m_drivetrainSubsystem);
+        // SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+        //   trajectory,
+        //   m_drivetrainSubsystem::getPose,
+        //   m_drivetrainSubsystem.getKinematics(),
+        //   xController,
+        //   yController,
+        //   thetaController,
+        //   m_drivetrainSubsystem::setModuleStates,
+        //   m_drivetrainSubsystem);
 
-        return new SequentialCommandGroup( new InstantCommand(() -> m_drivetrainSubsystem.resetOdometry(trajectory.getInitialPose())),
-        swerveControllerCommand,
-        new InstantCommand(() -> m_drivetrainSubsystem.drive(new ChassisSpeeds(0.0, 0.0, 0.0))));
-        } catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory: ", ex.getStackTrace());
-        }
-        return null;
+        // return new SequentialCommandGroup( new InstantCommand(() -> m_drivetrainSubsystem.resetOdometry(trajectory.getInitialPose())),
+        // swerveControllerCommand,
+        // new InstantCommand(() -> m_drivetrainSubsystem.drive(new ChassisSpeeds(0.0, 0.0, 0.0))));
+        // } catch (IOException ex) {
+        //     DriverStation.reportError("Unable to open trajectory: ", ex.getStackTrace());
+        // }
+        // return null;
     // return new DefaultAutoCommand(m_drivetrainSubsystem, "/home/lvuser/deploy/Test.wpilib.json");
   }
 
