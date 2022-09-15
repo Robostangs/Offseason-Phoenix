@@ -139,9 +139,12 @@ public class RobotContainer {
           m_drivetrainSubsystem::setModuleStates,
           m_drivetrainSubsystem);
 
-        return new SequentialCommandGroup( new InstantCommand(() -> m_drivetrainSubsystem.resetOdometry(trajectory.getInitialPose())),
-        swerveControllerCommand,
-        new InstantCommand(() -> m_drivetrainSubsystem.drive(new ChassisSpeeds(0.0, 0.0, 0.0))));
+        return new SequentialCommandGroup(
+            new InstantCommand(() -> m_drivetrainSubsystem.resetOdometry(trajectory.getInitialPose())),
+            swerveControllerCommand,
+            new DefaultShooterCommand(m_shooterSubsystem, m_limelightSubsystem, m_drivetrainSubsystem, new AutoShootCommand(m_feederSubsystem)),
+            new InstantCommand(() -> m_drivetrainSubsystem.drive(new ChassisSpeeds(0.0, 0.0, 0.0)))
+        );
         } catch (IOException ex) {
             DriverStation.reportError("Unable to open trajectory: ", ex.getStackTrace());
         }
