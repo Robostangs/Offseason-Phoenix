@@ -1,10 +1,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.ShooterMappings;
+import frc.robot.ShooterEquation;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -35,7 +34,7 @@ public class DefaultShooterCommand extends CommandBase {
     @Override
     public void execute() {
         // double speed = SmartDashboard.getNumber("Shooter Power:", 0000);
-        double speed = ShooterMappings.getValueWithDistance(LimelightSubsystem.getDistance());
+        double speed = ShooterEquation.getSpeedWithDistance(m_limelightSubsystem.getDistance());
         if(m_limelightSubsystem.getTv() == 1 ) {
             m_shooterSubsystem.setShooterMotorVelocity(-speed);
             double rotateSpeed = -m_turnPid.calculate(m_limelightSubsystem.getTx());
