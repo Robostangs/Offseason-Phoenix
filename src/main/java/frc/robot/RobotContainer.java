@@ -29,6 +29,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
+import static frc.robot.Constants.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -46,6 +47,7 @@ public class RobotContainer {
   // private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
 
   private final XboxController m_DriverController = new XboxController(0);
+  private final XboxController m_ManipController = new XboxController(1);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -66,12 +68,12 @@ public class RobotContainer {
             () -> -modifyAxis(m_DriverController.getLeftY()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(m_DriverController.getLeftX()) * DrivetrainSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             () -> -modifyAxis(-m_DriverController.getRightX()) * DrivetrainSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
-            () -> -modifyAxis(m_DriverController.getRightTriggerAxis()),
-            () -> -modifyAxis(m_DriverController.getLeftTriggerAxis()),
+            () -> -modifyAxis(m_ManipController.getRightTriggerAxis()),
+            () -> -modifyAxis(m_ManipController.getLeftTriggerAxis()),
             () -> m_DriverController.getAButton()
     ));
 
-    new JoystickButton(m_DriverController, XboxController.Button.kA.value)
+    new JoystickButton(m_ManipController, XboxController.Button.kA.value)
       .whileHeld(new DefaultShooterCommand(m_shooterSubsystem,
                                           m_limelightSubsystem,
                                           m_drivetrainSubsystem,
@@ -79,9 +81,11 @@ public class RobotContainer {
       )
     );
 
-    new JoystickButton(m_DriverController, XboxController.Button.kB.value)
-      .whileHeld(new ManualShootCommand(m_feederSubsystem, m_shooterSubsystem));
+    new JoystickButton(m_ManipController, XboxController.Button.kB.value)
+      .whileHeld(new ManualShootCommand(m_feederSubsystem, m_shooterSubsystem, MANUAL_SHOOT_SPEED));
     
+    new JoystickButton(m_ManipController, XboxController.Button.kY.value)
+      .whileHeld(new ManualShootCommand(m_feederSubsystem, m_shooterSubsystem, -2000));
 
     // Configure the button bindings
     configureButtonBindings();

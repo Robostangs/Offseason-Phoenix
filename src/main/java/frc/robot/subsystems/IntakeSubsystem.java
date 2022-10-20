@@ -47,7 +47,6 @@ public class IntakeSubsystem extends SubsystemBase{
     @Override
     public void periodic() {
         setCompresser(true);
-        setIntakePosition(SmartDashboard.getBoolean("Solenoid", false));
         super.periodic();
     }
 }    
